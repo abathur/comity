@@ -1,4 +1,4 @@
-
+set -u
 if [[ -n "$1" ]]; then
 	source $1
 	shift

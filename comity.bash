@@ -14,10 +14,8 @@ trap(){
 	# printf "bash_source=%s\n" "${BASH_SOURCE[@]}"
 	# gen safe name from the source path of our immediate caller
 	local safe_map_name="__comity${BASH_SOURCE[1]//[^0-9a-zA-Z_]/_}"
+	declare -Ag "$safe_map_name"
 	local -n safe_map="$safe_map_name"
-	if [[ ${#safe_map[@]} == 0 ]]; then
-		declare -Ag "$safe_map_name"
-	fi
 	case $1 in
 		"''" | -l* | -p*)
 		  # l/p flags; just run
