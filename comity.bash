@@ -28,12 +28,12 @@ trap(){
 				for signal in "$@"; do
 					normalizedA="${__comity_signal_map[$signal]}"
 					event off __comity_trapped_$normalizedA ${safe_map["$normalizedA"]}
-					unset safe_map["$normalizedA"]
+					unset "safe_map[$normalizedA]"
 				done
 			else
 				for signal in "${safe_map[@]}"; do
 					event off __comity_trapped_$signal ${safe_map["$signal"]}
-					unset safe_map["$signal"]
+					unset "safe_map[$signal]"
 				done
 			fi
 			;;
@@ -46,7 +46,7 @@ trap(){
 				# so try rming *THIS* caller's
 				normalizedB="${__comity_signal_map[$code]}"
 				event off __comity_trapped_$normalizedB ${safe_map["$normalizedB"]}
-				unset safe_map["$normalizedB"]
+				unset "safe_map[$normalizedB]"
 				return
 			fi
 			for signal in "$@"; do
@@ -54,7 +54,7 @@ trap(){
 
 				if [[ -v "safe_map[$normalizedC]" ]]; then
 					event off __comity_trapped_$normalizedC ${safe_map["$normalizedC"]}
-					unset safe_map["$normalizedC"]
+					unset "safe_map[$normalizedC]"
 				else
 					# shellcheck disable=SC2064
 					builtin trap "event emit __comity_trapped_$normalizedC" "$normalizedC"
