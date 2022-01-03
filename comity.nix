@@ -1,4 +1,4 @@
-{ stdenv, lib, resholvePackage, fetchFromGitHub, bashup-events44, doCheck ? true, bats, bash_4, shellcheck}:
+{ stdenv, lib, resholvePackage, fetchFromGitHub, bashup-events44, doCheck ? true, bats, shellcheck}:
 
 resholvePackage rec {
   pname = "comity";
