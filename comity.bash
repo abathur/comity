@@ -18,10 +18,10 @@ trap(){
 	local -n safe_map="$safe_map_name"
 	case $1 in
 		"''" | -l* | -p*)
-		  # l/p flags; just run
-		  # l > p; p w/o specs == bare
-		  # shellcheck disable=SC2064
-		  builtin trap "$@";;
+			# l/p flags; just run
+			# l > p; p w/o specs == bare
+			# shellcheck disable=SC2064
+			builtin trap "$@";;
 		-)
 			shift
 			if [[ $# -gt 0 ]]; then
