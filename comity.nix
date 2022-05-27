@@ -1,8 +1,15 @@
-{ stdenv, lib, resholvePackage, fetchFromGitHub, bashup-events44, doCheck ? true, bats, shellcheck}:
+{ lib
+, resholve
+, fetchFromGitHub
+, bashup-events44
+, doCheck ? true
+, bats
+, shellcheck
+}:
 
-resholvePackage rec {
+resholve.mkDerivation rec {
   pname = "comity";
-  version = "0.1.0";
+  version = "0.1.4";
 
   # src = fetchFromGitHub {
   #   owner = "abathur";
