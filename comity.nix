@@ -1,10 +1,7 @@
 { lib
 , resholve
-, fetchFromGitHub
+, callPackage
 , bashup-events44
-, doCheck ? true
-, bats
-, shellcheck
 }:
 
 resholve.mkDerivation rec {
@@ -35,8 +32,10 @@ resholve.mkDerivation rec {
 
   makeFlags = [ "prefix=${placeholder "out"}" ];
 
-  inherit doCheck;
-  checkInputs = [ shellcheck bats bashup-events44 ];
+  doCheck = false;
+
+  # TODO: below likely needs fixing
+  passthru.tests = callPackage ./test.nix { };
 
   meta = with lib; {
     description = "Bash library for neighborly signal sharing";
