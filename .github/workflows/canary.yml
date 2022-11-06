@@ -1,8 +1,9 @@
-name: "Test"
+name: "Canary: do I work against latest nixpkgs?"
 
 on:
-  pull_request:
-  push:
+  schedule:
+    # every sunday morning
+    - cron: "0 0 * * 0"
 
 jobs:
   test:
@@ -20,5 +21,7 @@ jobs:
         nix_path: nixpkgs=channel:nixpkgs-unstable
     - name: traditional nix-build succeeds
       run: nix-build
+    - name: update the lockfile
+      run: nix flake update
     - name: flake build + tests
       run: nix flake check --print-build-logs
