@@ -17,22 +17,28 @@
   # description = "Bash library for neighborly signal sharing";
 
   outputs = { self, nixpkgs, flake-utils, flake-compat, bats-require }:
-    flake-utils.lib.eachDefaultSystem (system:
+    {
+      overlays.default = final: prev: {
+        comity = prev.callPackage ./comity.nix { };
+      };
+      # shell = ./shell.nix;
+    } // flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs {
           inherit system;
           overlays = [
-            (final: prev: {
-              bats-require = bats-require.packages."${system}".default;
-            })
+            bats-require.overlays.default
+            self.overlays.default
           ];
         };
       in
-        rec {
-          packages.comity = pkgs.callPackage ./comity.nix { };
-          packages.default = self.packages.${system}.comity;
+        {
+          packages = {
+            inherit (pkgs) comity;
+            default = pkgs.comity;
+          };
           checks = pkgs.callPackages ./test.nix {
-            inherit (packages) comity;
+            inherit (pkgs) comity;
           };
         }
     );
