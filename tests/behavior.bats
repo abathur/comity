@@ -45,3 +45,14 @@ CASES
 bash --norc --noprofile -i single_file_duplicate_signal.bash
 bash --norc --noprofile -i single_file_duplicate_signal.bash $PWD/comity.bash
 CASES
+
+@test "bare invocation" {
+  require <({
+    status 0
+    line -1 begins "trap -- '"
+    line -1 ends "' SIGCHLD"
+  })
+} <<CASES
+bash --norc --noprofile -i bare_invocation.bash
+bash --norc --noprofile -i bare_invocation.bash $PWD/comity.bash
+CASES

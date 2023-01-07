@@ -12,7 +12,11 @@ fi
 trap(){
 	# echo "trap called with args $*"
 	# printf "bash_source=%s\n" "${BASH_SOURCE[@]}"
-	if [[ $1 == "--" ]]; then
+	if [[ $# -eq 0 ]]; then
+		# a bare trap invocation behaves like `trap -p`; pass on
+		builtin trap
+		return
+	elif [[ $1 == "--" ]]; then
 		# not listed in the synopsis, but bare trap and -p
 		# emit `trap -- 'code' SIGNAL`; try to swallow that
 		# before continuing
