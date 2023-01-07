@@ -56,3 +56,15 @@ CASES
 bash --norc --noprofile -i bare_invocation.bash
 bash --norc --noprofile -i bare_invocation.bash $PWD/comity.bash
 CASES
+
+@test "upgrade existing traps" {
+  require <({
+    status 0
+    line -4 equals "singlechild1"
+    line -3 equals "singlechild2"
+    line -2 equals "trap -- 'event emit __comity_trapped_0' EXIT"
+    line -1 equals "singlefile"
+  })
+} <<CASES
+bash --norc --noprofile -i upgrade_existing.bash $PWD/comity.bash
+CASES
