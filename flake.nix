@@ -19,7 +19,7 @@
   outputs = { self, nixpkgs, flake-utils, flake-compat, bats-require }:
     {
       overlays.default = final: prev: {
-        comity = prev.callPackage ./comity.nix { };
+        comity = final.callPackage ./comity.nix { };
       };
       # shell = ./shell.nix;
     } // flake-utils.lib.eachDefaultSystem (system:

@@ -16,7 +16,7 @@ resholve.mkDerivation rec {
   #   sha256 = "0jninx8aasa83g38qdpzy86m71xkpk7dzz8fvnab3lyk9fll4jk0";
   # };
 
-  src = ./.;
+  src = lib.cleanSource ./.;
 
   prePatch = ''
     patchShebangs .
