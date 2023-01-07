@@ -12,6 +12,12 @@ fi
 trap(){
 	# echo "trap called with args $*"
 	# printf "bash_source=%s\n" "${BASH_SOURCE[@]}"
+	if [[ $1 == "--" ]]; then
+		# not listed in the synopsis, but bare trap and -p
+		# emit `trap -- 'code' SIGNAL`; try to swallow that
+		# before continuing
+		shift
+	fi
 	# gen safe name from the source path of our immediate caller
 	local safe_map_name="__comity${BASH_SOURCE[1]//[^0-9a-zA-Z_]/_}"
 	declare -Ag "$safe_map_name"

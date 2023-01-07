@@ -11,6 +11,8 @@ load helpers
 } <<CASES
 bash --norc --noprofile -i single_file_single_signal.bash
 bash --norc --noprofile -i single_file_single_signal.bash $PWD/comity.bash
+bash --norc --noprofile -i single_file_single_signal_doubledash.bash
+bash --norc --noprofile -i single_file_single_signal_doubledash.bash $PWD/comity.bash
 CASES
 
 # just one case because stock traps don't support this case
