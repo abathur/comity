@@ -22,8 +22,10 @@ trap(){
 		# before continuing
 		shift
 	fi
+	# try not to leak variables
+	local safe_map_name signal normalizedA normalizedB normalizedC code
 	# gen safe name from the source path of our immediate caller
-	local safe_map_name="__comity${BASH_SOURCE[1]//[^0-9a-zA-Z_]/_}"
+	safe_map_name="__comity${BASH_SOURCE[1]//[^0-9a-zA-Z_]/_}"
 	declare -Ag "$safe_map_name"
 	local -n safe_map="$safe_map_name"
 	case $1 in
@@ -48,7 +50,7 @@ trap(){
 			fi
 			;;
 		*)
-			local code="$1"
+			code="$1"
 			shift
 			if [[ -v "__comity_signal_map[$code]" ]]; then
 				# code seems to be a valid signal spec
