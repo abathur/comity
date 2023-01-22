@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.3.0 (Jan 21 2023)
+- keep some implementation-detail variables from leaking into global scope
+- nix: add (and document) a devShell for testing comity
+
 ## v0.2.0 (Jan 7 2023)
 - nix: refactor some bits
   - start pulling bats helpers from bats-require

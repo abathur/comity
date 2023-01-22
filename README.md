@@ -27,6 +27,8 @@ I package comity and its dependencies with Nix and
 resholve for my own use, so that's the easiest way 
 to incorporate it into a project. 
 
+> Note: if you just want to try it, you can run `nix develop github:abathur/comity` to open a bare bash shell with comity pre-sourced.
+
 You can find a real-world example of how I do this 
 in https://github.com/abathur/shellswain, but the 
 basic steps are:

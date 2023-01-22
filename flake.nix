@@ -40,6 +40,15 @@
           checks = pkgs.callPackages ./test.nix {
             inherit (pkgs) comity;
           };
+          devShells = {
+            default = pkgs.mkShell {
+              # arcane because we want to hand the user an empty shell
+              # but we do want to go ahead and source the script.
+              shellHook = ''
+                exec env -i PATH=$PATH HOME=$(mktemp -d) PROMPT_COMMAND="source '${pkgs.comity}/bin/comity.bash'; unset PROMPT_COMMAND" ${pkgs.bashInteractive}/bin/bash --norc  --noprofile -i
+              '';
+            };
+          };
         }
     );
 }
